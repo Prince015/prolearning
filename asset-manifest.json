@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/prolearning/static/css/main.82e0c1b5.css",
-    "main.js": "/prolearning/static/js/main.db976fd6.js",
-    "static/js/787.5f9ab4f0.chunk.js": "/prolearning/static/js/787.5f9ab4f0.chunk.js",
-    "index.html": "/prolearning/index.html",
-    "main.82e0c1b5.css.map": "/prolearning/static/css/main.82e0c1b5.css.map",
-    "main.db976fd6.js.map": "/prolearning/static/js/main.db976fd6.js.map",
-    "787.5f9ab4f0.chunk.js.map": "/prolearning/static/js/787.5f9ab4f0.chunk.js.map"
+    "main.css": "/static/css/main.82e0c1b5.css",
+    "main.js": "/static/js/main.8abbd867.js",
+    "static/js/787.5f9ab4f0.chunk.js": "/static/js/787.5f9ab4f0.chunk.js",
+    "index.html": "/index.html",
+    "main.82e0c1b5.css.map": "/static/css/main.82e0c1b5.css.map",
+    "main.8abbd867.js.map": "/static/js/main.8abbd867.js.map",
+    "787.5f9ab4f0.chunk.js.map": "/static/js/787.5f9ab4f0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.82e0c1b5.css",
-    "static/js/main.db976fd6.js"
+    "static/js/main.8abbd867.js"
   ]
 }
