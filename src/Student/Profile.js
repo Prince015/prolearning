@@ -1,6 +1,5 @@
 import { Button, Card } from 'antd'
 import React from 'react'
-import *  as DateLo from "https://cdn.skypack.dev/date-streaks@1.2.1";
 
 import {
     Chart as ChartJS,
