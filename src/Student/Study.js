@@ -1,6 +1,7 @@
 import { Card } from 'antd'
 import React from 'react'
 
+
 function Study() {
     return (
         <div className='p-4 flex flex-col gap-2'>
@@ -24,29 +25,61 @@ function Study() {
             </Card>
             <Card>
                 <h3 className='font-bold mb-6 text-2xl text-gray-800/90'>Recent Uploads</h3>
-                <div className='cursor-pointer flex mt-3 gap-12 items-center'>
-                    <p className='underline text-base font-medium text-gray-900/90'>video added by Sagar Nishad related to Data Structure</p>
-                    <span>26/03/2034</span>
-                </div>
-                <div className='cursor-pointer flex mt-3 gap-12 items-center'>
-                    <p className='underline text-base font-medium text-gray-900/90'>video added by Sagar Nishad related to Data Structure</p>
-                    <span>26/03/2034</span>
-                </div>
-                <div className='cursor-pointer flex mt-3 gap-12 items-center'>
-                    <p className='underline text-base font-medium text-gray-900/90'>video added by Sagar Nishad related to Data Structure</p>
-                    <span>26/03/2034</span>
-                </div>
-                <div className='cursor-pointer flex mt-3 gap-12 items-center'>
-                    <p className='underline text-base font-medium text-gray-900/90'>video added by Sagar Nishad related to Data Structure</p>
-                    <span>26/03/2034</span>
-                </div>
-                <div className='cursor-pointer flex mt-3 gap-12 items-center'>
-                    <p className='underline text-base font-medium text-gray-900/90'>video added by Sagar Nishad related to Data Structure</p>
-                    <span>26/03/2034</span>
-                </div>
-                <div className='cursor-pointer flex mt-3 gap-12 items-center'>
-                    <p className='underline text-base font-medium text-gray-900/90'>video added by Sagar Nishad related to Data Structure</p>
-                    <span>26/03/2034</span>
+                <div className='grid gap-3 grid-cols-3'>
+                    <div className='shadow-xl h-full rounded-md cursor-pointer mt-3'>
+                        <img className='rounded-t-md h-44 object-cover' src={require("../assets/images/myHouse.png")} alt="" />
+                        <div className='px-2 py-2'>
+
+                        <p className=' text-base font-medium text-gray-900/90'>Topic : Data Structure</p>
+                        <p className=' text-base font-medium text-gray-900/90'>Added By Sagar Nishad</p>
+                        <span>26/03/2034</span>
+                        </div>
+                    </div>
+                    <div className='shadow-xl h-full rounded-md cursor-pointer mt-3'>
+                        <img className='rounded-t-md h-44 object-cover' src={require("../assets/images/myHouse.png")} alt="" />
+                        <div className='px-2 py-2'>
+
+                        <p className=' text-base font-medium text-gray-900/90'>Topic : Data Structure</p>
+                        <p className=' text-base font-medium text-gray-900/90'>Added By Sagar Nishad</p>
+                        <span>26/03/2034</span>
+                        </div>
+                    </div>
+                    <div className='shadow-xl h-full rounded-md cursor-pointer mt-3'>
+                        <img className='rounded-t-md h-44 object-cover' src={require("../assets/images/myHouse.png")} alt="" />
+                        <div className='px-2 py-2'>
+
+                        <p className=' text-base font-medium text-gray-900/90'>Topic : Data Structure</p>
+                        <p className=' text-base font-medium text-gray-900/90'>Added By Sagar Nishad</p>
+                        <span>26/03/2034</span>
+                        </div>
+                    </div>
+                    <div className='shadow-xl h-full rounded-md cursor-pointer mt-3'>
+                        <img className='rounded-t-md h-44 object-cover' src={require("../assets/images/myHouse.png")} alt="" />
+                        <div className='px-2 py-2'>
+
+                        <p className=' text-base font-medium text-gray-900/90'>Topic : Data Structure</p>
+                        <p className=' text-base font-medium text-gray-900/90'>Added By Sagar Nishad</p>
+                        <span>26/03/2034</span>
+                        </div>
+                    </div>
+                    <div className='shadow-xl h-full rounded-md cursor-pointer mt-3'>
+                        <img className='rounded-t-md h-44 object-cover' src={require("../assets/images/myHouse.png")} alt="" />
+                        <div className='px-2 py-2'>
+
+                        <p className=' text-base font-medium text-gray-900/90'>Topic : Data Structure</p>
+                        <p className=' text-base font-medium text-gray-900/90'>Added By Sagar Nishad</p>
+                        <span>26/03/2034</span>
+                        </div>
+                    </div>
+                    <div className='shadow-xl h-full rounded-md cursor-pointer mt-3'>
+                        <img className='rounded-t-md h-44 object-cover' src={require("../assets/images/myHouse.png")} alt="" />
+                        <div className='px-2 py-2'>
+
+                        <p className=' text-base font-medium text-gray-900/90'>Topic : Data Structure</p>
+                        <p className=' text-base font-medium text-gray-900/90'>Added By Sagar Nishad</p>
+                        <span>26/03/2034</span>
+                        </div>
+                    </div>
                 </div>
             </Card>
         </div>

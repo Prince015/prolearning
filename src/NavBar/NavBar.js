@@ -1,10 +1,11 @@
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useMemo, useRef, useState } from 'react'
 import { Combobox, Disclosure, Menu, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { Dialog, Popover } from '@headlessui/react'
 import { Listbox } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { Button, Divider, Dropdown } from 'antd'
 
 
 const navigation = [
@@ -105,7 +106,24 @@ export default function NavBar() {
     }
 
     const login = true;
-    const type = ['student','teacher','organization']
+    const type = ['student', 'teacher', 'organization']
+
+
+    const items = [
+        {
+            key: '1',
+            label: (
+                <>
+                    <p className='text-base mb-2 text-gray-900/90 font-semibold'>Today's Thoughts</p>
+                    <p className='text-base text-gray-800/70 font-medium'>
+                        If one is estranged from oneself, then one is estranged from others too. If one is out of touch with oneself, then one cannot touch others.
+                    </p>
+                </>
+            ),
+        },
+    ]
+
+
     return (
         <Disclosure as="nav" className="bg-gray-800 z-50 sticky top-0">
             {({ open }) => (
@@ -174,11 +192,21 @@ export default function NavBar() {
                                     className="rounded-full ml-12 mx-4 bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                                 >
                                     <span className="sr-only">View notifications</span>
-                                    <BellIcon className="h-6 w-6" aria-hidden="true" />
+                                    <Dropdown
+                                        menu={{
+                                            items,
+                                        }}
+                                        placement="bottom"
+                                    // arrow
+                                    >
+                                        <BellIcon className="h-6 w-6" aria-hidden="true" />
+                                    </Dropdown>
+
                                 </button> :
                                     <a href="#notice" className='ml-8 mx-4 text-gray-300 font-semibold'>
                                         Notice
                                     </a>
+
                                 }
 
                                 {/* Profile dropdown */}
@@ -216,7 +244,7 @@ export default function NavBar() {
                                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                             <Menu.Item>
                                                 {({ active }) => (
-                                                    <Link to ={`${type[0]}-profile`}
+                                                    <Link to={`${type[0]}-profile`}
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                     >
                                                         Your Profile
