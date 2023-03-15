@@ -61,7 +61,7 @@ export default function Footer() {
         </div>
         <div className=" flex flex-col gap-3">
           <h3 className="text-blue-400 font-medium text-xl">
-            Your school is not present ?
+            Your organization is not present ?
           </h3>
           <p className="text-gray-300">
             Request here, we'll add soon

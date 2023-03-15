@@ -9,19 +9,19 @@ import RegisterUsers from './RegisterUsers'
 function Home() {
   return (
     <div>
-        <section style={{height:'calc(100vh - 4rem)'}} className=' bg-gray-400'>
+        <section id='home' style={{height:'calc(100vh - 4rem)'}} className=' bg-gray-400'>
             <HeroSection/>
         </section>
-        <section className=''>
+        <section id='about-us' className=''>
             <AboutUs/>
         </section>
-        <section className='bg-gray-400'>
+        <section id='learning-materials' className='bg-gray-400'>
             <LearningMaterials/>
         </section>
-        <section className=''>
+        <section id='register-users' className=''>
             <RegisterUsers/>
         </section>
-        <section className='bg-gray-400'>
+        <section id='notice' className='bg-gray-400'>
             <Notice/>
         </section>
         <section className='bg-gray-800'>
