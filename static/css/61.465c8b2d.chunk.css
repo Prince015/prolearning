@@ -1,0 +1,2 @@
+.noticeContainer{-webkit-animation:scroll 25s linear 3s infinite;animation:scroll 25s linear 3s infinite}.noticeContainer:hover{-webkit-animation-play-state:paused;animation-play-state:paused}@-webkit-keyframes scroll{0%{-webkit-transform:translateY(0);transform:translateY(0)}to{-webkit-transform:translateY(-100%);transform:translateY(-100%)}}@keyframes scroll{0%{-webkit-transform:translateY(0);transform:translateY(0)}to{-webkit-transform:translateY(-100%);transform:translateY(-100%)}}
+/*# sourceMappingURL=61.465c8b2d.chunk.css.map*/
