@@ -1,11 +1,12 @@
-import { Fragment, useMemo, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { Combobox, Disclosure, Menu, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { Dialog, Popover } from '@headlessui/react'
-import { Listbox } from '@headlessui/react'
+import { Link, useNavigate } from 'react-router-dom'
+import { Dialog } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
-import { Button, Divider, Dropdown } from 'antd'
+import { Dropdown } from 'antd'
+import { useStateValue } from '../Store/StateProvider.js'
+import { actionTypes } from '../Store/Reducer.js'
 
 
 const navigation = [
@@ -31,12 +32,14 @@ const people = [
 
 export default function NavBar() {
 
-    const navigate = useNavigate()
+    const [state, dispatch] = useStateValue();
+    const login = state?.login
     const loginModalRef = useRef()
     const [selectedIndex, setSelectedIndex] = useState(0)
 
     //   const [state, dispatch] = useStateValue();
-
+    const navigate = useNavigate()
+    
     const [number, setNumber] = useState()
     const [flag, setFlag] = useState(false);
     const [otp, setOtp] = useState("");
@@ -77,9 +80,48 @@ export default function NavBar() {
         setSignUpModal(false)
     }
 
-    const handleLogin = async (e) => {
 
+    const handleLogin = async (e) => {
+        console.log(selectedIndex)
+        e.preventDefault()
+        let data = {}
+        for (let i = 0; i < e.target?.length-1; i++) {
+            data = {...data,[e?.target[i].name]:e.target[i].value}
+        }
+        console.log(data)
+
+        const response = await fetch('https://hilarious-veil-wasp.cyclic.app/auth/student/login ',{
+            method:"POST",
+            headers:{
+                "Content-Type": "application/json",
+            },
+            body:JSON.stringify(data)
+        })
+        const rspData = await response.json()
+        if(rspData?.Tocken){
+            localStorage.setItem('authToken',rspData?.Tocken)
+            dispatch({
+                type: actionTypes.log_in,
+                login: true,
+                authToken : localStorage.getItem("authToken")
+            });
+            closeModal()
+        }
+        console.log(rspData)
     }
+
+    const handleLogout =  () => {
+        localStorage.clear()
+        dispatch({
+            type: actionTypes.log_out,
+            login: false,
+            authToken : null
+        });
+        navigate('/')
+    }
+
+
+
     const createUser = async (e) => {
 
     }
@@ -105,7 +147,7 @@ export default function NavBar() {
         navigate('/terms-and-conditions')
     }
 
-    const login = true;
+    
     const type = ['student', 'teacher', 'organization']
 
 
@@ -121,7 +163,24 @@ export default function NavBar() {
                 </>
             ),
         },
+
     ]
+
+    const getQuote = async () => {
+        const rsp = await fetch('https://hilarious-veil-wasp.cyclic.app//today-special/get')
+        const data = await rsp.json()
+        data.then((data)=>{
+            console.log(data)
+        }).catch((err)=>{
+            console.log(err.message)
+        })
+    }
+
+
+    useEffect(() => {
+        // getQuote()
+    }, [])
+
 
 
     return (
@@ -263,12 +322,12 @@ export default function NavBar() {
                                             </Menu.Item>
                                             <Menu.Item>
                                                 {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                    <div
+                                                    onClick={handleLogout}
+                                                        className={classNames(active ? 'bg-gray-100 cursor-pointer' : '', 'cursor-pointer block px-4 py-2 text-sm text-gray-700')}
                                                     >
                                                         Sign out
-                                                    </a>
+                                                    </div>
                                                 )}
                                             </Menu.Item>
                                         </Menu.Items>
@@ -345,7 +404,7 @@ export default function NavBar() {
                                                                     } >Student</Tab>
                                                                 </Tab.List>
                                                                 <Tab.Panels>
-                                                                    <Tab.Panel><form style={{ display: !flag ? "block" : "none" }} onSubmit={handleLogin}>
+                                                                    <Tab.Panel><form style={{ display: !flag ? "block" : "none" }} onSubmit={(e)=>handleLogin(e)}>
 
                                                                         <input type='text' name='phoneNo' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none' placeholder='Dice Code' />
                                                                         <input type='password' name='passWord' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none my-3' placeholder='Password' />
@@ -355,7 +414,7 @@ export default function NavBar() {
                                                                         </button>
 
                                                                     </form></Tab.Panel>
-                                                                    <Tab.Panel><form style={{ display: !flag ? "block" : "none" }} onSubmit={handleLogin}>
+                                                                    <Tab.Panel><form style={{ display: !flag ? "block" : "none" }} onSubmit={(e)=>handleLogin(e)}>
 
                                                                         <input name='phoneNumber' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none' placeholder='Phone No.' />
                                                                         <input name='password' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none my-3' placeholder='Pssword' />
@@ -365,10 +424,10 @@ export default function NavBar() {
                                                                         </button>
 
                                                                     </form></Tab.Panel>
-                                                                    <Tab.Panel><form style={{ display: !flag ? "block" : "none" }} onSubmit={handleLogin}>
+                                                                    <Tab.Panel><form style={{ display: !flag ? "block" : "none" }} onSubmit={(e)=>handleLogin(e)}>
 
-                                                                        <input name='phoneNumber' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none' placeholder='Phone No.' />
-                                                                        <input name='password' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none my-3' placeholder='Pssword' />
+                                                                        <input name='Mobile' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none' placeholder='Phone No.' />
+                                                                        <input name='pass' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none my-3' placeholder='Pssword' />
                                                                         <p onClick={() => { setLoginModal(false); setSignInModal(false); setSignUpModal(true) }} className='text-sm text-center underline cursor-pointer w-fit mx-auto ' >Don't have an account ?</p>
                                                                         <button type='submit' className='w-full rounded-lg border bg-gray-600/70 border-gray-400 hover:bg-gray-600/60 text-white py-2 mt-5'>
                                                                             Login
@@ -490,6 +549,7 @@ export default function NavBar() {
                                                                     </div>
 
                                                                     <input name='text' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none' placeholder='Name' />
+                                                                    {selectedIndex === 1 && <input name='text' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none' placeholder='Field of Study' />}
                                                                     <input name='phoneNumber' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none' placeholder='Phone No.' />
                                                                     <input name='password' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none' placeholder='Pssword' />
                                                                     <input name='verifyPassword' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none' placeholder='Verify Pssword' />

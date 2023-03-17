@@ -1,8 +1,12 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import Home from "./Home/Home";
 // import Home from "./Home/Home";
 import NavBar from "./NavBar/NavBar";
+import { actionTypes } from "./Store/Reducer";
+import { useStateValue } from "./Store/StateProvider";
+import ChatGpt from "./Student/ChatGpt";
 import HelpSomeone from "./Student/HelpSomeone";
 import Notes from "./Student/Notes";
 import Profile from "./Student/Profile";
@@ -12,15 +16,24 @@ import Study from "./Student/Study";
 import Test from "./Student/Test";
 
 
-const Home = lazy(() => import('./Home/Home'));
 function App() {
 
+  const [state, dispatch] = useStateValue();
+
+  useEffect(() => {
+    if (localStorage.getItem("authToken")) {
+      dispatch({
+        type: actionTypes.log_in,
+        login: true,
+        authToken : localStorage.getItem("authToken")
+      });
+    }
+  }, []);
 
 
   return (
     <BrowserRouter>
     <NavBar/>
-    <Suspense fallback={<div>Loading...</div>}></Suspense>
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/student-profile" element={<ProfileLayout/>} >
@@ -30,6 +43,7 @@ function App() {
           <Route path="test" element={<Test/>} />
           <Route path="skills" element={<Skills/>} />
           <Route path="help-someone" element={<HelpSomeone/>} />
+          <Route path="chat-gpt" element={<ChatGpt/>} />
         </Route>
       </Routes>
     </BrowserRouter>
