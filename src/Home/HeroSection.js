@@ -31,7 +31,7 @@ function HeroSection() {
     return (
         <div className='flex py-24 justify-between gap-8 mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 '>
             <div >
-                <h4 className='text-6xl font-bold font-sans'>Providing Learnig Platform <br /> Increasing Learning Outcomes</h4>
+                <h4 className='text-6xl font-bold font-sans'>Providing Learning Platform <br /> Increasing Learning Outcomes</h4>
                 <p className='text-3xl my-10 font-medium'>will help to manage notes, give assignments and to grow together</p>
                 <div className="min-w-72 flex gap-2 items-center ">
                     <Combobox value={selected} onChange={setSelected}>

@@ -14,6 +14,9 @@ import ProfileLayout from "./Student/ProfileLayout";
 import Skills from "./Student/Skills";
 import Study from "./Student/Study";
 import Test from "./Student/Test";
+import Contents from "./Teacher/Contents";
+import StudentsDoubts from "./Teacher/StudentsDoubts";
+import ViewTopics from "./Teacher/ViewTopics";
 
 
 function App() {
@@ -25,7 +28,8 @@ function App() {
       dispatch({
         type: actionTypes.log_in,
         login: true,
-        authToken : localStorage.getItem("authToken")
+        authToken : localStorage.getItem("authToken"),
+        userType : localStorage.getItem("userType"),
       });
     }
   }, []);
@@ -44,6 +48,12 @@ function App() {
           <Route path="skills" element={<Skills/>} />
           <Route path="help-someone" element={<HelpSomeone/>} />
           <Route path="chat-gpt" element={<ChatGpt/>} />
+        </Route>
+        <Route path="/teacher-profile" element={<ProfileLayout/>} >
+          <Route index element={<Profile/>} />
+          <Route path="contents" element={<Contents/>} />
+          <Route path="contents/view-topics" element={<ViewTopics/>} />
+          <Route path="student-doubts" element={<StudentsDoubts/>} />
         </Route>
       </Routes>
     </BrowserRouter>

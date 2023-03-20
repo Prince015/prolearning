@@ -2,6 +2,7 @@ export const initialState = {
     login: null,
     authToken: null,
     loginRef: null,
+    type : null,
 }
 
 export const actionTypes = {
@@ -18,13 +19,15 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 authToken: action.authToken,
-                login: true
+                login: true,
+                type : action.userType
             }
         case actionTypes.log_out:
             return {
                 ...state,
                 authToken: null,
                 login: false,
+                type : null
             }
         case actionTypes.set_authToken:
             return {

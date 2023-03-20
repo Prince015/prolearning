@@ -89,8 +89,27 @@ export default function NavBar() {
             data = {...data,[e?.target[i].name]:e.target[i].value}
         }
         console.log(data)
+        let url = ''
+        switch (selectedIndex) {
+            case 0:
+                
+                break;
+        
+            case 1:
+                url = 'https://hilarious-veil-wasp.cyclic.app/auth/teacher/login'
+                break;
+        
+            case 2:
+                url = 'https://hilarious-veil-wasp.cyclic.app/auth/student/login'
+                break;
+        
+            default:
+                console.log("wrong choice")
+                return 
+                break;
+        }
 
-        const response = await fetch('https://hilarious-veil-wasp.cyclic.app/auth/student/login ',{
+        const response = await fetch(url,{
             method:"POST",
             headers:{
                 "Content-Type": "application/json",
@@ -98,16 +117,18 @@ export default function NavBar() {
             body:JSON.stringify(data)
         })
         const rspData = await response.json()
+        console.log(rspData)
         if(rspData?.Tocken){
             localStorage.setItem('authToken',rspData?.Tocken)
+            localStorage.setItem('userType',selectedIndex)
             dispatch({
                 type: actionTypes.log_in,
                 login: true,
-                authToken : localStorage.getItem("authToken")
+                authToken : localStorage.getItem("authToken"),
+                userType : selectedIndex
             });
             closeModal()
         }
-        console.log(rspData)
     }
 
     const handleLogout =  () => {
@@ -115,7 +136,7 @@ export default function NavBar() {
         dispatch({
             type: actionTypes.log_out,
             login: false,
-            authToken : null
+            authToken : null,
         });
         navigate('/')
     }
@@ -148,7 +169,7 @@ export default function NavBar() {
     }
 
     
-    const type = ['student', 'teacher', 'organization']
+    const type = ['organization', 'teacher', 'student']
 
 
     const items = [
@@ -303,7 +324,7 @@ export default function NavBar() {
                                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                             <Menu.Item>
                                                 {({ active }) => (
-                                                    <Link to={`${type[0]}-profile`}
+                                                    <Link to={`${type[state.type]}-profile`}
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                     >
                                                         Your Profile
@@ -416,8 +437,8 @@ export default function NavBar() {
                                                                     </form></Tab.Panel>
                                                                     <Tab.Panel><form style={{ display: !flag ? "block" : "none" }} onSubmit={(e)=>handleLogin(e)}>
 
-                                                                        <input name='phoneNumber' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none' placeholder='Phone No.' />
-                                                                        <input name='password' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none my-3' placeholder='Pssword' />
+                                                                        <input name='Mobile' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none' placeholder='Phone No.' />
+                                                                        <input name='pass' className='w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none my-3' placeholder='Pssword' />
                                                                         <p onClick={() => { setLoginModal(false); setSignInModal(false); setSignUpModal(true) }} className='text-sm text-center underline cursor-pointer w-fit mx-auto ' >Don't have an account ?</p>
                                                                         <button type='submit' className='w-full rounded-lg border bg-gray-600/70 border-gray-400 hover:bg-gray-600/60 text-white py-2 mt-5'>
                                                                             Login
